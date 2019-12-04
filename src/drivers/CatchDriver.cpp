@@ -46,7 +46,7 @@ const char TEST_CASE_NAME[] = "catch-test-case-for-cucumber-cpp";
 
 REGISTER_TEST_CASE(&exec_test_body, TEST_CASE_NAME);
 
-Catch::Session session;
+Catch::Session catchSession;
 
 const char TEST_APPLICATION_NAME[] = "cucumber-cpp-catch-app";
 bool INITIALIZED = false;
@@ -54,7 +54,7 @@ void initSession() {
     static const char* args[] = {TEST_APPLICATION_NAME, "-w", "NoTests", TEST_CASE_NAME};
     static const size_t argsSize = sizeof(args) / sizeof(*args);
     BOOST_STATIC_ASSERT(argsSize == 4);
-    int returnCode = session.applyCommandLine(argsSize, args);
+    int returnCode = catchSession.applyCommandLine(argsSize, args);
     assert(returnCode == 0);
     (void)returnCode;
     INITIALIZED = true;
@@ -99,7 +99,7 @@ const InvokeResult CatchStep::invokeStepBody() {
     boost::call_once(initialized, initSession);
 
     currentTestBody = boost::bind(&CatchStep::body, this);
-    int numFailed = session.run();
+    int numFailed = catchSession.run();
     currentTestBody.clear();
 
     return getResult(numFailed);
