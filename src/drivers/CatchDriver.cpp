@@ -13,6 +13,7 @@
 #include <boost/thread/once.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/static_assert.hpp>
 
 namespace {
 std::stringstream catchOutStream;
@@ -52,7 +53,7 @@ bool INITIALIZED = false;
 void initSession() {
     static const char* args[] = {TEST_APPLICATION_NAME, "-w", "NoTests", TEST_CASE_NAME};
     static const size_t argsSize = sizeof(args) / sizeof(*args);
-    static_assert(argsSize == 4);
+    BOOST_STATIC_ASSERT(argsSize == 4);
     int returnCode = session.applyCommandLine(argsSize, args);
     assert(returnCode == 0);
     (void)returnCode;
