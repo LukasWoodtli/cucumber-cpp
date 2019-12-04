@@ -21,6 +21,12 @@ if(TARGET Boost::unit_test_framework)
     target_link_libraries(BoostCalculatorSteps PRIVATE Calc cucumber-cpp Boost::unit_test_framework)
 endif()
 
+if(CUKE_ENABLE_CATCH)
+    add_executable(CatchCalculatorSteps features/step_definitions/CatchCalculatorSteps)
+    target_link_libraries(CatchCalculatorSteps PRIVATE Calc cucumber-cpp)
+endif()
+
+
 if(TARGET Qt::Test)
     add_executable(QtTestCalculatorSteps features/step_definitions/QtTestCalculatorSteps)
     target_link_libraries(QtTestCalculatorSteps Calc Qt::Test cucumber-cpp)

@@ -78,6 +78,7 @@ for TEST in \
     build/examples/Calc/GTestCalculatorSteps \
     build/examples/Calc/QtTestCalculatorSteps \
     build/examples/Calc/BoostCalculatorSteps \
+    build/examples/Calc/CatchCalculatorSteps \
     build/examples/Calc/FuncArgsCalculatorSteps \
 ; do
     "${TEST}" > /dev/null &

@@ -50,6 +50,10 @@ if(TARGET Boost::unit_test_framework)
     cuke_add_driver_test(integration/drivers/BoostDriverTest Boost::unit_test_framework)
 endif()
 
+if(CUKE_ENABLE_CATCH)
+    cuke_add_driver_test(integration/drivers/CatchDriverTest)
+endif()
+
 if((TARGET Qt::Test)
     # FIXME: not including this in the test suite due to memory leak #190
     AND (NOT VALGRIND_TESTS)
