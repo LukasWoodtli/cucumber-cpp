@@ -210,7 +210,11 @@ endif()
 #
 
 if(CUKE_ENABLE_CATCH)
-    include_directories(${CMAKE_SOURCE_DIR}/3rdparty/catchorg)
+    if(NOT DEFINED CMAKE_CXX_STANDARD OR CMAKE_CXX_STANDARD STREQUAL 98)
+        message(STATUS "C++11 is needed for Catch2, building with c++11 enabled")
+        set(CMAKE_CXX_STANDARD 11)
+    endif()
+    include_directories(SYSTEM ${CMAKE_SOURCE_DIR}/3rdparty/catchorg)
 endif()
 
 #
