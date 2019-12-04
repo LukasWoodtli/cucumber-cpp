@@ -1,5 +1,17 @@
 cmake_minimum_required(VERSION 3.1)
 
+
+
+option(CUKE_ENABLE_CATCH        "Enable Catch2 Test framework" ON)
+if(CUKE_ENABLE_CATCH)
+    # Needed for CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS
+    cmake_minimum_required(VERSION 3.4)
+
+    # needed to export all names from Catch2
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS YES CACHE BOOL "Export all symbols")
+endif()
+
+
 if(NOT CMAKE_VERSION VERSION_LESS "3.3")
     # Don't ignore visibility related properties for non-SHARED targets
     cmake_policy(SET CMP0063 NEW)
@@ -20,13 +32,13 @@ option(CUKE_USE_STATIC_GTEST    "Statically link Google Test" ON)
 option(CUKE_ENABLE_BOOST_TEST   "Enable Boost.Test framework" ON)
 option(CUKE_ENABLE_EXAMPLES     "Build examples" OFF)
 option(CUKE_ENABLE_GTEST        "Enable Google Test framework" ON)
-option(CUKE_ENABLE_CATCH        "Enable Catch2 Test framework" ${UNIX})  # doesn't work yet on windows
 option(CUKE_ENABLE_QT           "Enable Qt framework" ON)
 option(CUKE_TESTS_E2E           "Enable end-to-end tests" ON)
 option(CUKE_TESTS_UNIT          "Enable unit tests" ON)
 option(CUKE_TESTS_VALGRIND      "Enable tests within Valgrind" OFF)
 set(GMOCK_SRC_DIR "" CACHE STRING "Google Mock framework sources path (otherwise downloaded)")
 set(GMOCK_VER "1.7.0" CACHE STRING "Google Mock framework version to be used")
+
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
