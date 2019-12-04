@@ -1,0 +1,3 @@
+# don't format 3rd party header (catch2)
+Language: Cpp
+DisableFormat: true

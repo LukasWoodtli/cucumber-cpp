@@ -35,9 +35,10 @@ It relies on a few libraries:
   Optional for the internal test suite. By default downloaded and built by CMake.
 * [Qt 4 or 5](http://qt-project.org/). Optional for the CalcQt example and QtTest driver (only Qt 5).
 
-This header-only library is included in the source code:
+These header-only libraries are included in the source code:
 
 * [JSON Spirit](http://www.codeproject.com/KB/recipes/JSON_Spirit.aspx)
+* [Catch2](https://github.com/catchorg/Catch2)
 
 It might work with earlier versions of the libraries, but it was not
 tested with them.
@@ -117,3 +118,7 @@ Create your first feature (an example is available [here](examples/Calc/features
 Then create your step definition runner (an example is available [here](examples/Calc/features/step_definitions/BoostCalculatorSteps.cpp)). In order to compile the step definition runner, make sure to add [cucumber include directory](includes) to the include path and link with *libcucumber-cpp.a* and additional testing libraries (boost unit test).
 
 Run the step definition runner in the background and then cucumber, like in the Calc example in the previous section. The step definition runner should exit after the feature is run and cucumber exits.
+
+### Using Catch2
+
+To write steps with Catch2 include the provided header file wrapper `CucucmperCppCatch.hpp` instead the original catch header. It configures catch properly and includes its header.

@@ -35,6 +35,11 @@ if(TARGET Qt5::Test)
     list(APPEND CUKE_EXTRA_PRIVATE_LIBRARIES Qt5::Test)
 endif()
 
+
+if(CUKE_ENABLE_CATCH)
+    list(APPEND CUKE_SOURCES drivers/CatchDriver.cpp)
+endif()
+
 if(CMAKE_EXTRA_GENERATOR OR MSVC_IDE)
     message(STATUS "Adding header files to project")
     file(GLOB_RECURSE CUKE_HEADERS "${CUKE_INCLUDE_DIR}/cucumber-cpp/*.hpp")
@@ -115,6 +120,15 @@ install(
         "${CMAKE_CURRENT_BINARY_DIR}/cucumber-cpp/internal/CukeExport.hpp"
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/cucumber-cpp/internal"
 )
+
+if(CUKE_ENABLE_CATCH)
+install(
+        DIRECTORY
+        "${CMAKE_SOURCE_DIR}/3rdparty/catchorg/"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+)
+endif()
+
 install(
     TARGETS
         cucumber-cpp-nomain

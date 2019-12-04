@@ -19,6 +19,7 @@ option(CUKE_USE_STATIC_GTEST    "Statically link Google Test" ON)
 option(CUKE_ENABLE_BOOST_TEST   "Enable Boost.Test framework" ON)
 option(CUKE_ENABLE_EXAMPLES     "Build examples" OFF)
 option(CUKE_ENABLE_GTEST        "Enable Google Test framework" ON)
+option(CUKE_ENABLE_CATCH        "Enable Catch2 Test framework" ON)
 option(CUKE_ENABLE_QT           "Enable Qt framework" ON)
 option(CUKE_TESTS_E2E           "Enable end-to-end tests" ON)
 option(CUKE_TESTS_UNIT          "Enable unit tests" ON)
@@ -202,6 +203,14 @@ if(CUKE_ENABLE_GTEST)
         set(GMOCK_ROOT "${CMAKE_CURRENT_BINARY_DIR}/gmock")
     endif()
     find_package(GMock REQUIRED)
+endif()
+
+#
+# Catch2
+#
+
+if(CUKE_ENABLE_CATCH)
+    include_directories(${CMAKE_SOURCE_DIR}/3rdparty/catchorg)
 endif()
 
 #
