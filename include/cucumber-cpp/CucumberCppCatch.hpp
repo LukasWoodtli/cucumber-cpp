@@ -1,7 +1,9 @@
 #ifndef CUKE_CATCHWRAPPER_HPP_
 #define CUKE_CATCHWRAPPER_HPP_
 
+#ifndef _MSC_VER
 #pragma GCC visibility push(default)
+#endif
 
 // needed to capture output of catch
 #define CATCH_CONFIG_NOSTDOUT
@@ -13,5 +15,7 @@
 #undef WHEN
 #undef THEN
 
+#ifndef _MSC_VER
 #pragma GCC visibility pop
+#endif
 #endif // CUKE_CATCHWRAPPER_HPP_

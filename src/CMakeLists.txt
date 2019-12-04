@@ -106,6 +106,11 @@ foreach(TARGET
                 ws2_32
         )
     endif(MINGW)
+    if(CUKE_ENABLE_CATCH)
+        # needed to export all names from Catch2
+        set_target_properties(${TARGET}
+            PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+    endif()
 endforeach()
 
 target_link_libraries(cucumber-cpp
