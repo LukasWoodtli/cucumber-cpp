@@ -28,11 +28,6 @@ set(GMOCK_SRC_DIR "" CACHE STRING "Google Mock framework sources path (otherwise
 set(GMOCK_VER "1.7.0" CACHE STRING "Google Mock framework version to be used")
 
 
-if(CUKE_ENABLE_CATCH AND WIN32)
-  # Needed for WINDOWS_EXPORT_ALL_SYMBOLS
-  cmake_minimum_required(VERSION 3.4)
-endif()
-
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 #

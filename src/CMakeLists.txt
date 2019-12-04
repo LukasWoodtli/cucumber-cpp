@@ -1,3 +1,12 @@
+
+if(CUKE_ENABLE_CATCH AND (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC"))
+    # Needed for CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS
+    cmake_minimum_required(VERSION 3.4)
+
+    # needed to export all names from Catch2
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+endif()
+
 include(GenerateExportHeader)
 
 set(CUKE_SOURCES
@@ -106,11 +115,6 @@ foreach(TARGET
                 ws2_32
         )
     endif(MINGW)
-    if(CUKE_ENABLE_CATCH)
-        # needed to export all names from Catch2
-        set_target_properties(${TARGET}
-            PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
-    endif()
 endforeach()
 
 target_link_libraries(cucumber-cpp
