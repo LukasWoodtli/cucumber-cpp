@@ -67,13 +67,14 @@ std::string filterUnNeededTestOutput(const std::string& input) {
     boost::split(lines, input, boost::is_any_of("\r\n"), boost::token_compress_on);
     std::stringstream output;
     for (std::vector<std::string>::iterator it = lines.begin(); it != lines.end(); ++it) {
-        if (not boost::algorithm::contains(*it, CATCH_OUTPUT_SEPARATOR)
-            and not boost::starts_with(*it, "test cases: ")
-            and not boost::starts_with(*it, "assertions: ")
-            and not boost::algorithm::contains(*it, "Filters: ")
-            and not boost::algorithm::contains(*it, "All tests passed")
-            and not boost::algorithm::contains(*it, TEST_APPLICATION_NAME)
-            and not boost::algorithm::contains(*it, "Run with -? for options")) {
+        if (!boost::algorithm::contains(*it, CATCH_OUTPUT_SEPARATOR)
+            && !boost::starts_with(*it, "test cases: ")
+            && !boost::starts_with(*it, "test cases: ")
+            && !boost::starts_with(*it, "assertions: ")
+            && !boost::algorithm::contains(*it, "Filters: ")
+            && !boost::algorithm::contains(*it, "All tests passed")
+            && !boost::algorithm::contains(*it, TEST_APPLICATION_NAME)
+            && !boost::algorithm::contains(*it, "Run with -? for options")) {
             output << *it << '\n';
         }
     }
