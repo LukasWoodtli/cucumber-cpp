@@ -1,11 +1,5 @@
 
-if(CUKE_ENABLE_CATCH AND (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC"))
-    # Needed for CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS
-    cmake_minimum_required(VERSION 3.4)
 
-    # needed to export all names from Catch2
-    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
-endif()
 
 include(GenerateExportHeader)
 
@@ -64,17 +58,15 @@ add_library(cucumber-cpp-internal STATIC ${CUKE_SOURCES})
 add_library(cucumber-cpp-nomain ${CUKE_SOURCES})
 add_library(cucumber-cpp ${CUKE_SOURCES} main.cpp)
 
-if(NOT (CUKE_ENABLE_CATCH AND (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")))
-    set_target_properties(
-        cucumber-cpp-internal
-        cucumber-cpp
-        cucumber-cpp-nomain
-        PROPERTIES
-            DEFINE_SYMBOL cucumber_cpp_EXPORTS
-            CXX_VISIBILITY_PRESET hidden
-            VISIBILITY_INLINES_HIDDEN ON
-    )
-endif()
+set_target_properties(
+    cucumber-cpp-internal
+    cucumber-cpp
+    cucumber-cpp-nomain
+    PROPERTIES
+        DEFINE_SYMBOL cucumber_cpp_EXPORTS
+        CXX_VISIBILITY_PRESET default
+        VISIBILITY_INLINES_HIDDEN ON
+)
 
 generate_export_header(cucumber-cpp
     EXPORT_FILE_NAME "cucumber-cpp/internal/CukeExport.hpp"
