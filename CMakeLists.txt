@@ -5,7 +5,7 @@ if(CUKE_ENABLE_CATCH)
     cmake_minimum_required(VERSION 3.4)
 
     # needed to export all names from Catch2
-    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS On)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS YES CACHE BOOL "Export all symbols")
 endif()
 
 
