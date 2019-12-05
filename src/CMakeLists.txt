@@ -65,7 +65,7 @@ set_target_properties(
     PROPERTIES
         DEFINE_SYMBOL cucumber_cpp_EXPORTS
         CXX_VISIBILITY_PRESET default
-        VISIBILITY_INLINES_HIDDEN ON
+        VISIBILITY_INLINES_HIDDEN OFF
 )
 
 generate_export_header(cucumber-cpp

@@ -1,6 +1,8 @@
 #ifndef CUKE_CATCHWRAPPER_HPP_
 #define CUKE_CATCHWRAPPER_HPP_
 
+#include <cucumber-cpp/internal/CukeExport.hpp>
+
 #ifndef _MSC_VER
 #pragma GCC visibility push(default)
 #endif

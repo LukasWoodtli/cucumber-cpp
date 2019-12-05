@@ -7,9 +7,9 @@
 #include <catch2/catch.hpp>
 
 namespace Catch {
-std::ostream& cout();
-std::ostream& clog();
-std::ostream& cerr();
+CUCUMBER_CPP_EXPORT std::ostream& cout();
+CUCUMBER_CPP_EXPORT std::ostream& clog();
+CUCUMBER_CPP_EXPORT std::ostream& cerr();
 } // namespace Catch
 
 namespace cucumber {

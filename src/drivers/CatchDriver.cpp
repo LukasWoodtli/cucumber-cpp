@@ -1,6 +1,6 @@
 // this define and include need to be first!
 #define CATCH_CONFIG_RUNNER
-#include <cucumber-cpp/CucumberCppCatch.hpp>
+#include "cucumber-cpp/CucumberCppCatch.hpp"
 
 #include "cucumber-cpp/internal/drivers/CatchDriver.hpp"
 
