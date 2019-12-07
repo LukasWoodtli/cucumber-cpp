@@ -22,13 +22,14 @@ endif()
 
 project(Cucumber-Cpp)
 
+
 option(BUILD_SHARED_LIBS        "Generate shared libraries" OFF)
 option(CUKE_USE_STATIC_BOOST    "Statically link Boost (except boost::test)" ${WIN32})
 option(CUKE_USE_STATIC_GTEST    "Statically link Google Test" ON)
 option(CUKE_ENABLE_BOOST_TEST   "Enable Boost.Test framework" ON)
 option(CUKE_ENABLE_EXAMPLES     "Build examples" OFF)
 option(CUKE_ENABLE_GTEST        "Enable Google Test framework" ON)
-option(CUKE_ENABLE_CATCH        "Enable Catch2 Test framework" ON)
+option(CUKE_ENABLE_CATCH        "Enable Catch2 Test framework" ${UNIX})  # doesn't work yet on windows
 option(CUKE_ENABLE_QT           "Enable Qt framework" ON)
 option(CUKE_TESTS_E2E           "Enable end-to-end tests" ON)
 option(CUKE_TESTS_UNIT          "Enable unit tests" ON)
