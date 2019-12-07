@@ -308,6 +308,7 @@ WireProtocolHandler::WireProtocolHandler(const WireMessageCodec& codec, CukeEngi
 
 std::string WireProtocolHandler::handle(const std::string &request) const {
     std::string response;
+    std::cout << "L: WIRE request: " << request << std::endl;
     // LOG request
     try {
         boost::shared_ptr<const WireCommand> command = codec.decode(request);
@@ -317,6 +318,7 @@ std::string WireProtocolHandler::handle(const std::string &request) const {
         response = "[\"fail\"]";
     }
     // LOG response
+    std::cout << "L: WIRE response: " << response << std::endl;
     return response;
 }
 

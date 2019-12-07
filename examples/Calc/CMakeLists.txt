@@ -18,7 +18,7 @@ endif()
 
 if(TARGET Boost::unit_test_framework)
     add_executable(BoostCalculatorSteps features/step_definitions/BoostCalculatorSteps)
-    target_link_libraries(BoostCalculatorSteps PRIVATE Calc cucumber-cpp Boost::unit_test_framework)
+    target_link_libraries(BoostCalculatorSteps PRIVATE Calc cucumber-cpp Boost::unit_test_framework Boost::timer)
 endif()
 
 if(TARGET Qt::Test)

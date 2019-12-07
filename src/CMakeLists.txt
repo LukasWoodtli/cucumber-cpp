@@ -88,6 +88,8 @@ foreach(TARGET
             Boost::date_time
             Boost::filesystem
             Boost::thread
+            Boost::timer
+            gherkin::gherkin
             ${CUKE_EXTRA_PRIVATE_LIBRARIES}
     )
     # Don't export or import symbols for statically linked libraries
@@ -107,6 +109,11 @@ target_link_libraries(cucumber-cpp
     PRIVATE
         Boost::program_options
 )
+
+if(CUKE_USE_GHERKIN_C)
+    target_compile_definitions(cucumber-cpp PRIVATE "-DUSE_GHERKIN_C")
+endif()
+
 
 include(GNUInstallDirs)
 install(DIRECTORY ${CUKE_INCLUDE_DIR}/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

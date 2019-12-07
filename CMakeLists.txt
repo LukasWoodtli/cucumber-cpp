@@ -23,10 +23,24 @@ option(CUKE_ENABLE_QT           "Enable Qt framework" ON)
 option(CUKE_TESTS_E2E           "Enable end-to-end tests" ON)
 option(CUKE_TESTS_UNIT          "Enable unit tests" ON)
 option(CUKE_TESTS_VALGRIND      "Enable tests within Valgrind" OFF)
+option(CUKE_USE_GHERKIN_C       "Use the gherkin-c library instead of cucumber ruby" OFF)
 set(GMOCK_SRC_DIR "" CACHE STRING "Google Mock framework sources path (otherwise downloaded)")
 set(GMOCK_VER "1.7.0" CACHE STRING "Google Mock framework version to be used")
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+#
+# Get and build gherkin-c
+#
+
+if(CUKE_USE_GHERKIN_C)
+    find_package(GherkinC REQUIRED)
+endif()
+
 
 #
 # Option deprecation: if deprecated option is defined
@@ -107,7 +121,7 @@ else()
 endif()
 
 set(Boost_USE_STATIC_RUNTIME OFF)
-set(CUKE_CORE_BOOST_LIBS thread system regex date_time program_options filesystem)
+set(CUKE_CORE_BOOST_LIBS thread system regex date_time program_options filesystem timer)
 if(CUKE_ENABLE_BOOST_TEST)
     # "An external test runner utility is required to link with dynamic library" (Boost User's Guide)
     set(Boost_USE_STATIC_LIBS OFF)
@@ -362,6 +376,7 @@ else()
                 ${USES_TERMINAL}
                 # Execute in same directory as where DLLs appear on Windows
                 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src
+                BYPRODUCTS ${CUKE_DYNAMIC_CPP_STEPS} ${CUKE_DYNAMIC_CPP_STEPS_OBJ}
                 )
         endfunction(add_feature_target)
 
