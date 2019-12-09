@@ -49,6 +49,11 @@ if(CMAKE_EXTRA_GENERATOR OR MSVC_IDE)
     list(APPEND CUKE_SOURCES ${CUKE_HEADERS})
 endif()
 
+if (WIN32)
+    set(WIN_LINKER_DEF_FILE "${PROJECT_SOURCE_DIR}/exports.def")
+    list(APPEND CUKE_SOURCES ${WIN_LINKER_DEF_FILE})
+endif ()
+
 # Library for unit tests relying on internals
 add_library(cucumber-cpp-internal STATIC ${CUKE_SOURCES})
 
@@ -106,6 +111,9 @@ foreach(TARGET
                 ws2_32
         )
     endif(MINGW)
+    if (WIN32)
+        set_target_properties(${TARGET} PROPERTIES LINK_FLAGS "${CMAKE_LINK_DEF_FILE_FLAG}${WIN_LINKER_DEF_FILE}")
+    endif ()
 endforeach()
 
 target_link_libraries(cucumber-cpp

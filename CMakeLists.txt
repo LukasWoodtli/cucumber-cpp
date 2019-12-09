@@ -3,13 +3,7 @@ cmake_minimum_required(VERSION 3.1)
 
 
 option(CUKE_ENABLE_CATCH        "Enable Catch2 Test framework" ON)
-if(CUKE_ENABLE_CATCH)
-    # Needed for CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS
-    cmake_minimum_required(VERSION 3.4)
 
-    # needed to export all names from Catch2
-    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS YES CACHE BOOL "Export all symbols")
-endif()
 
 
 if(NOT CMAKE_VERSION VERSION_LESS "3.3")
