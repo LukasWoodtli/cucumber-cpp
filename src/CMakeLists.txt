@@ -37,7 +37,7 @@ endif()
 
 
 if(CUKE_ENABLE_CATCH)
-    list(APPEND CUKE_SOURCES drivers/CatchDriver.cpp)
+    list(APPEND CUKE_SOURCES drivers/CatchDriver.cpp "../3rdparty/catchorg/catch2/catch.hpp")
 endif()
 
 if(CMAKE_EXTRA_GENERATOR OR MSVC_IDE)
@@ -49,10 +49,6 @@ if(CMAKE_EXTRA_GENERATOR OR MSVC_IDE)
     list(APPEND CUKE_SOURCES ${CUKE_HEADERS})
 endif()
 
-if (WIN32)
-    set(WIN_LINKER_DEF_FILE "${PROJECT_SOURCE_DIR}/exports.def")
-    list(APPEND CUKE_SOURCES ${WIN_LINKER_DEF_FILE})
-endif ()
 
 # Library for unit tests relying on internals
 add_library(cucumber-cpp-internal STATIC ${CUKE_SOURCES})
@@ -73,6 +69,15 @@ set_target_properties(
 generate_export_header(cucumber-cpp
     EXPORT_FILE_NAME "cucumber-cpp/internal/CukeExport.hpp"
 )
+
+if (CUKE_ENABLE_CATCH)
+    set_target_properties(
+            cucumber-cpp-internal
+            cucumber-cpp
+            cucumber-cpp-nomain
+            PROPERTIES
+            WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif ()
 
 foreach(TARGET
         cucumber-cpp-internal
@@ -111,9 +116,6 @@ foreach(TARGET
                 ws2_32
         )
     endif(MINGW)
-    if (WIN32)
-        set_target_properties(${TARGET} PROPERTIES LINK_FLAGS "${CMAKE_LINK_DEF_FILE_FLAG}${WIN_LINKER_DEF_FILE}")
-    endif ()
 endforeach()
 
 target_link_libraries(cucumber-cpp
