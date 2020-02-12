@@ -1,9 +1,11 @@
 #ifndef CUKE_CATCHWRAPPER_HPP_
 #define CUKE_CATCHWRAPPER_HPP_
 
-#ifndef _MSC_VER
+#include <cucumber-cpp/internal/CukeExport.hpp>
+
+#if defined(__GNUC__) || defined(__clang__)
 #pragma GCC visibility push(default)
-#endif // _MSC_VER
+#endif
 
 
 // needed to capture output of catch
@@ -16,8 +18,8 @@
 #undef WHEN
 #undef THEN
 
-#ifndef _MSC_VER
+#if defined(__GNUC__) || defined(__clang__)
 #pragma GCC visibility pop
-#endif // _MSC_VER
+#endif
 
 #endif // CUKE_CATCHWRAPPER_HPP_
